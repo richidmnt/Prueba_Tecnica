@@ -6,7 +6,6 @@ public class BusinnesException extends RuntimeException {
     private String code;
     private HttpStatus httpStatus;
 
-
     public BusinnesException(String message,HttpStatus httpStatus, String code) {
         super(message);
         this.code = code;

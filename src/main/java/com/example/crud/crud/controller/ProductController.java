@@ -1,6 +1,7 @@
 package com.example.crud.crud.controller;
 
 import com.example.crud.crud.entity.ProductEntity;
+import jakarta.validation.Valid;
 import org.apache.catalina.LifecycleState;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,15 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<ProductEntity> saveProduct(@RequestBody ProductEntity productSave){
+//    public ResponseEntity<ProductEntity> saveProduct(@RequestBody ProductEntity productSave){
+//        ProductEntity productNew = productServiceImp.saveProduct(productSave);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(productNew);
+//    }
+    public ResponseEntity<ProductEntity> saveProduct( @Valid @RequestBody ProductEntity productSave) {
         ProductEntity productNew = productServiceImp.saveProduct(productSave);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productNew);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Location", "/products/" + productNew.getId())
+                .body(productNew);
     }
 
     @DeleteMapping("/product/{id}")

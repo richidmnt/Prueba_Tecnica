@@ -2,6 +2,7 @@ package com.example.crud.crud.service;
 
 import com.example.crud.crud.entity.ProductEntity;
 import com.example.crud.crud.exception.BusinnesException;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.example.crud.crud.repository.ProductRepository;
@@ -43,7 +44,7 @@ public class ProductServiceImp {
         productRepository.delete(product);
 
     }
-
+    @Transactional
     public ProductEntity updateProduct(Long id,ProductEntity productEntity){
 
             ProductEntity productUpdate = productRepository.findById(id).orElseThrow(()->new RuntimeException("No se pudo encontrar el producto" + id));
